@@ -29,13 +29,27 @@ def separatePara(filename):
     bounding_boxes = []
     for cnt in contours:
         x, y, w, h = cv2.boundingRect(cnt)
-        if w > 200 and h > 40:  # Tighter filter to reduce noise
-            paragraph = img[y:y+h, x:x+w]
-            paragraphs.append(paragraph)
-            bounding_boxes.append((x, y, w, h))
-    # Sort by y (top-to-bottom)
+        # Size filter
+        if w > 200 and h > 40:
+            roi = binary[y:y+h, x:x+w]
+            # Count inner contours (small text-like blobs)
+            roi_contours, _ = cv2.findContours(roi, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+            num_inner_contours = len(roi_contours)
+            # Heuristics:
+            # - Paragraphs: many small internal contours
+            # - Tables: few large contours, possible straight edges
+            # - Pictures: few contours, mostly filled
+            contour_areas = [cv2.contourArea(c) for c in roi_contours]
+            avg_area = np.mean(contour_areas) if contour_areas else 0
+            total_area = w * h
+            fill_ratio = np.sum(roi == 255) / total_area  # how much of the region is white (text pixels)
+            # Rules (tweak as needed)
+            if num_inner_contours > 10 and avg_area < 1000 and fill_ratio < 0.5:
+                paragraphs.append(img[y:y+h, x:x+w])
+                bounding_boxes.append((x, y, w, h))
+    # Sort top-to-bottom
     paragraphs = [para for _, para in sorted(zip(bounding_boxes, paragraphs), key=lambda pair: pair[0][1])]
-    return paragraphs    
+    return paragraphs 
 
 
 '''
@@ -54,10 +68,7 @@ def displayImage(paraList):
         
         
         
-        
-        
-        
-        
+
 displayImage(separatePara("CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/001.png"))
 displayImage(separatePara("CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/002.png"))
 displayImage(separatePara("CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/003.png"))
