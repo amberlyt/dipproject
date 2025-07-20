@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Sun Jul 13 16:10:14 2025
-
-@author: Chan Xian Kang
-"""
-
 import cv2
 import numpy as np
 import matplotlib.pyplot as pt
@@ -48,7 +42,11 @@ def separatePara(filename):
                 paragraphs.append(img[y:y+h, x:x+w])
                 bounding_boxes.append((x, y, w, h))
     # Sort top-to-bottom
-    paragraphs = [para for _, para in sorted(zip(bounding_boxes, paragraphs), key=lambda pair: pair[0][1])]
+    def sort_reading_order(box_para_pair):
+        (x, y, w, h), _ = box_para_pair
+        return (x // 300, y)  # tweak 300 based on column width
+    
+    paragraphs = [para for _, para in sorted(zip(bounding_boxes, paragraphs), key=sort_reading_order)]
     return paragraphs 
 
 
@@ -64,21 +62,19 @@ def displayImage(paraList):
         if key == ord('q'):
             break
         cv2.destroyAllWindows()
+             
         
         
-        
-        
+displayImage(separatePara(r"Converted Paper (8)/006.png"))
 
-displayImage(separatePara("CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/001.png"))
-displayImage(separatePara("CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/002.png"))
-displayImage(separatePara("CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/003.png"))
-displayImage(separatePara("CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/004.png"))
-displayImage(separatePara("CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/005.png"))
-displayImage(separatePara("CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/006.png"))
-displayImage(separatePara("CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/007.png"))
-displayImage(separatePara("CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/008.png"))
-
-
-
-
+'''
+displayImage(separatePara("Converted Paper (8)/001.png"))
+displayImage(separatePara("Converted Paper (8)/002.png"))
+displayImage(separatePara("Converted Paper (8)/003.png"))
+displayImage(separatePara("Converted Paper (8)/004.png"))
+displayImage(separatePara("Converted Paper (8)/005.png"))
+displayImage(separatePara("Converted Paper (8)/006.png"))
+displayImage(separatePara("Converted Paper (8)/007.png"))
+displayImage(separatePara("Converted Paper (8)/008.png"))
+'''
 
