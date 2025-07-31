@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-
-
 import cv2
 import numpy as np
 import matplotlib.pyplot as pt
@@ -66,7 +63,7 @@ def saveParagraphs(paraList, original_filename):
     # Manually extract image name
     parts = original_filename.replace("\\", "/").split("/")
     base_name = parts[-1]  # '005.png'
-    folder_name = "DIP_Assignment/Sample outputs from " + base_name 
+    folder_name = "TaskB_Output/" + base_name 
 
     # Try to create folder using OpenCV workaround (writing dummy and deleting)
     try:
@@ -84,31 +81,23 @@ def saveParagraphs(paraList, original_filename):
 
 '''
 # Example usage
-img_path = "CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/005.png"
+img_path = "Converted Paper (8)/005.png"
 paras = separatePara(img_path)
 saveParagraphs(paras, img_path)
 '''
         
 for i in range(1, 9):
-    file_path = f"CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/{i:03d}.png"
+    file_path = f"Converted Paper (8)/{i:03d}.png"
     paras = separatePara(file_path)
     saveParagraphs(paras, file_path)
         
-#displayImage(separatePara("CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/005.png"))
 
-        
-'''
-displayImage(separatePara("CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/001.png"))
-displayImage(separatePara("CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/002.png"))
-displayImage(separatePara("CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/003.png"))
-displayImage(separatePara("CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/004.png"))
-displayImage(separatePara("CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/005.png"))
-displayImage(separatePara("CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/006.png"))
-displayImage(separatePara("CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/007.png"))
-displayImage(separatePara("CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/008.png"))
-'''
-
-
-
-
+displayImage(separatePara("Converted Paper (8)/001.png"))
+displayImage(separatePara("Converted Paper (8)/002.png"))
+displayImage(separatePara("Converted Paper (8)/003.png"))
+displayImage(separatePara("Converted Paper (8)/004.png"))
+displayImage(separatePara("Converted Paper (8)/005.png"))
+displayImage(separatePara("Converted Paper (8)/006.png"))
+displayImage(separatePara("Converted Paper (8)/007.png"))
+displayImage(separatePara("Converted Paper (8)/008.png"))
 
