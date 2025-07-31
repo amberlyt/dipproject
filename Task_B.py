@@ -1,4 +1,10 @@
 # -*- coding: utf-8 -*-
+"""
+Created on Sun Jul 13 16:10:14 2025
+
+@author: Chan Xian Kang
+"""
+
 import cv2
 import numpy as np
 import matplotlib.pyplot as pt
@@ -42,11 +48,7 @@ def separatePara(filename):
                 paragraphs.append(img[y:y+h, x:x+w])
                 bounding_boxes.append((x, y, w, h))
     # Sort top-to-bottom
-    def sort_reading_order(box_para_pair):
-        (x, y, w, h), _ = box_para_pair
-        return (x // 300, y)  # tweak 300 based on column width
-    
-    paragraphs = [para for _, para in sorted(zip(bounding_boxes, paragraphs), key=sort_reading_order)]
+    paragraphs = [para for _, para in sorted(zip(bounding_boxes, paragraphs), key=lambda pair: pair[0][1])]
     return paragraphs 
 
 
@@ -62,19 +64,55 @@ def displayImage(paraList):
         if key == ord('q'):
             break
         cv2.destroyAllWindows()
-             
         
-        
-displayImage(separatePara(r"Converted Paper (8)/006.png"))
+
+def saveParagraphs(paraList, original_filename):
+    # Manually extract image name
+    parts = original_filename.replace("\\", "/").split("/")
+    base_name = parts[-1]  # '005.png'
+    folder_name = "DIP_Assignment/Sample outputs from " + base_name 
+
+    # Try to create folder using OpenCV workaround (writing dummy and deleting)
+    try:
+        cv2.imwrite(folder_name + "/dummy.png", np.zeros((10, 10), dtype=np.uint8))
+        import os
+        os.remove(folder_name + "/dummy.png")  # only use os here temporarily, optional
+    except:
+        pass  # folder likely didn't exist but now does
+
+    # Save paragraph images
+    for i, para in enumerate(paraList):
+        filepath = folder_name + "/paragraph_" + str(i + 1) + ".png"
+        cv2.imwrite(filepath, para)
+        print("Saved:", filepath)
 
 '''
-displayImage(separatePara("Converted Paper (8)/001.png"))
-displayImage(separatePara("Converted Paper (8)/002.png"))
-displayImage(separatePara("Converted Paper (8)/003.png"))
-displayImage(separatePara("Converted Paper (8)/004.png"))
-displayImage(separatePara("Converted Paper (8)/005.png"))
-displayImage(separatePara("Converted Paper (8)/006.png"))
-displayImage(separatePara("Converted Paper (8)/007.png"))
-displayImage(separatePara("Converted Paper (8)/008.png"))
+# Example usage
+img_path = "CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/005.png"
+paras = separatePara(img_path)
+saveParagraphs(paras, img_path)
 '''
+        
+for i in range(1, 9):
+    file_path = f"CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/{i:03d}.png"
+    paras = separatePara(file_path)
+    saveParagraphs(paras, file_path)
+        
+#displayImage(separatePara("CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/005.png"))
+
+        
+'''
+displayImage(separatePara("CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/001.png"))
+displayImage(separatePara("CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/002.png"))
+displayImage(separatePara("CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/003.png"))
+displayImage(separatePara("CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/004.png"))
+displayImage(separatePara("CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/005.png"))
+displayImage(separatePara("CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/006.png"))
+displayImage(separatePara("CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/007.png"))
+displayImage(separatePara("CSC2014- Group Assignment_Aug-2025/Converted Paper (8)/008.png"))
+'''
+
+
+
+
 
