@@ -13,15 +13,15 @@ import time
 from typing import Tuple
 
 # === File Paths ===
-video_path ='/Users/iantan/Documents/CSC2014-DIP Lab Exercises/CSC2014- Group Assignment_Aug-2025/street.mp4'
-face_detector_path = '/Users/iantan/Documents/CSC2014-DIP Lab Exercises/CSC2014- Group Assignment_Aug-2025/face_detector.xml'
-output_path ='/Users/iantan/Documents/CSC2014-DIP Lab Exercises/CSC2014- Group Assignment_Aug-2025/videos/blurred_output.mp4'
-talking_path ='/Users/iantan/Documents/CSC2014-DIP Lab Exercises/CSC2014- Group Assignment_Aug-2025/talking.mp4'
-endscreen_path ='/Users/iantan/Documents/CSC2014-DIP Lab Exercises/CSC2014- Group Assignment_Aug-2025/endscreen.mp4'
-watermark1_path ='/Users/iantan/Documents/CSC2014-DIP Lab Exercises/CSC2014- Group Assignment_Aug-2025/watermark1.png'
-watermark2_path ='/Users/iantan/Documents/CSC2014-DIP Lab Exercises/CSC2014- Group Assignment_Aug-2025/watermark2.png'
-processed_path = '/Users/iantan/Documents/CSC2014-DIP Lab Exercises/CSC2014- Group Assignment_Aug-2025/outputs/final_processed_video.avi'
-final_output_path = '/Users/iantan/Documents/CSC2014-DIP Lab Exercises/CSC2014- Group Assignment_Aug-2025/outputs/final_with_endscreen.avi'
+video_path = 'videos/street.mp4'
+face_detector_path = 'face_detector.xml'
+output_path = 'videos/blurred_output.mp4'
+talking_path = 'videos/talking.mp4'
+endscreen_path = 'videos/endscreen.mp4'
+watermark1_path = 'watermarks/watermark1.png'
+watermark2_path = 'watermarks/watermark2.png'
+processed_path = 'outputs/final_processed_video.avi'
+final_output_path = 'outputs/final_with_endscreen.avi'
 
 # === Setup Video Properties ===
 cap = cv2.VideoCapture(video_path)
