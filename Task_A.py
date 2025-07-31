@@ -11,9 +11,9 @@ import numpy as np
 import os
 
 # === File Paths ===
-video_path = 'C:/Users/Chen Jie Hui/Downloads/GitHub/dipproject/videos/street.mp4'
-face_detector_path = 'C:/Users/Chen Jie Hui/Downloads/GitHub/dipproject/face_detector.xml'
-output_path = 'C:/Users/Chen Jie Hui/Downloads/GitHub/dipproject/videos/blurred_output.mp4'
+video_path = 'videos/street.mp4'
+face_detector_path = 'face_detector.xml'
+output_path = 'videos/blurred_output.mp4'
 talking_path = 'videos/talking.mp4'
 endscreen_path = 'videos/endscreen.mp4'
 watermark1_path = 'watermarks/watermark1.png'
