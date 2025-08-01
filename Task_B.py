@@ -41,7 +41,10 @@ def separatePara(filename):
                 paragraphs.append(img[y:y+h, x:x+w])
                 bounding_boxes.append((x, y, w, h))
     # Sort top-to-bottom
-    paragraphs = [para for _, para in sorted(zip(bounding_boxes, paragraphs), key=lambda pair: pair[0][1])]
+    def sort_reading_order(box_para_pair):
+        (x, y, w, h), _ = box_para_pair
+        return (x // 300, y)
+    paragraphs = [para for _, para in sorted(zip(bounding_boxes, paragraphs), key=sort_reading_order)]
     return paragraphs 
 
 
@@ -91,10 +94,8 @@ for i in range(1, 9):
     paras = separatePara(file_path)
     saveParagraphs(paras, file_path)
         
-#displayImage(separatePara("Converted Paper (8)/005.png"))
-
         
-'''
+
 displayImage(separatePara("Converted Paper (8)/001.png"))
 displayImage(separatePara("Converted Paper (8)/002.png"))
 displayImage(separatePara("Converted Paper (8)/003.png"))
@@ -103,8 +104,5 @@ displayImage(separatePara("Converted Paper (8)/005.png"))
 displayImage(separatePara("Converted Paper (8)/006.png"))
 displayImage(separatePara("Converted Paper (8)/007.png"))
 displayImage(separatePara("Converted Paper (8)/008.png"))
-'''
-
-
 
 
