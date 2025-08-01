@@ -20,8 +20,8 @@ talking_path = 'videos/talking.mp4'
 endscreen_path = 'videos/endscreen.mp4'
 watermark1_path = 'watermarks/watermark1.png'
 watermark2_path = 'watermarks/watermark2.png'
-processed_path = 'outputs/final_processed_video.avi'
-final_output_path = 'outputs/final_with_endscreen.avi'
+processed_path = 'TaskA_Output/final_processed_video.avi'
+final_output_path = 'TaskA_Output/final_with_endscreen.avi'
 
 # === Setup Video Properties ===
 cap = cv2.VideoCapture(video_path)
