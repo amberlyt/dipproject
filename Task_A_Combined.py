@@ -11,13 +11,13 @@ import numpy as np
 import os
 
 # === File Paths ===
-video_path = 'videos/street.mp4'
-face_detector_path = 'face_detector.xml'
-output_path = 'videos/blurred_output.mp4'
-talking_path = 'videos/talking.mp4'
-endscreen_path = 'videos/endscreen.mp4'
-watermark1_path = 'watermarks/watermark1.png'
-watermark2_path = 'watermarks/watermark2.png'
+video_path = '/Users/amberlyteoh/dipproject/videos/street.mp4'
+face_detector_path = '/Users/amberlyteoh/dipproject/face_detector.xml'
+output_path = '/Users/amberlyteoh/dipproject/videos/blurred_output.mp4'
+talking_path = '/Users/amberlyteoh/dipproject/videos/talking.mp4'
+endscreen_path = '/Users/amberlyteoh/dipproject/videos/endscreen.mp4'
+watermark1_path = '/Users/amberlyteoh/dipproject/watermarks/watermark1.png'
+watermark2_path = '/Users/amberlyteoh/dipproject/watermarks/watermark2.png'
 processed_path = 'outputs/final_processed_video.avi'
 final_output_path = 'outputs/final_with_endscreen.avi'
 
